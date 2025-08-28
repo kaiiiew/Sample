@@ -1,0 +1,218 @@
+<link rel="stylesheet" href="style.css">
+<script src="main.js" defer></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Digital Portfolio</title>
+  <meta name="description" content="A clean, responsive portfolio to showcase projects, skills, and experience." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E💼%3C/text%3E%3C/svg%3E">
+  
+    </style>
+</head>
+<body>
+  <!-- ===== NAVBAR ===== -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Kyle Adrian N. Centeno</span>
+      </div>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#about">About</a></li>
+          <!--<li><a href="#experience">Experience</a></li>-->
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="actions">
+        <button id="themeToggle" class="btn ghost" aria-label="Toggle theme">🌙</button>
+        <a class="btn" href="sample.pdf" id="downloadCV" download>Download CV</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="home" class="container">
+    <!-- ===== HERO ===== -->
+    <section class="hero" aria-labelledby="intro-title">
+      <div>
+        <span class="tag">Available for work • Remote / Onsite</span>
+        <h1 id="intro-title">Hi, I’m <span style="background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent">Kyle Adrian N. Centeno</span> a student with a passion for learning, collaboration, and self-growth.</h1>
+        <p class="lead">I enjoy taking on challenges, working with others, and turning ideas into something meaningful and impactful. My goal is to keep growing into someone who creates value both in projects and in people’s lives.</p>
+        <div class="actions">
+          <a href="#projects" class="btn">See my work</a>
+          <a href="#contact" class="btn ghost">Let’s collaborate</a>
+        </div>
+        <!--<div class="stats" role="list" aria-label="Quick stats">
+          <div class="stat" role="listitem"><strong id="yearsExp">5+</strong><span class="tiny">Years Experience</span></div>
+          <div class="stat" role="listitem"><strong id="projectsCount">24</strong><span class="tiny">Projects</span></div>
+          <div class="stat" role="listitem"><strong>100%</strong><span class="tiny">Client Satisfaction</span></div>
+        </div>-->
+      </div>
+      <div class="hero-card">
+        <div style="display:flex; align-items:center; gap:16px;">
+          <div class="avatar" aria-hidden="true">
+            <!-- Replace src with your photo -->
+            <img alt="Portrait" src="AB27F13A-542B-4147-90B4-CA110D11297B.JPEG" />
+          </div>
+          <div>
+            <h3 style="margin:0">Kyle Adrian N. Centeno</h3>
+            <p class="tiny" style="margin:4px 0 0">Front‑end Developer • UI Engineer</p>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-top:16px;">
+          <div class="panel" style="text-align:center;">
+            <div class="tiny">Primary Stack</div>
+            <strong>HTML • CSS • JS</strong>
+          </div>
+          <div class="panel" style="text-align:center;">
+            <div class="tiny">Frameworks</div>
+            <strong>Flutter</strong>
+          </div>
+          <div class="panel" style="text-align:center;">
+            <div class="tiny">Tools</div>
+            <strong>Git • Figma • Canva</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects" aria-labelledby="projects-title">
+      <div class="section-header">
+        <h2 id="projects-title">Projects</h2>
+        <!-- Use an image or gradient background -->
+        <p>Filter and explore selected work.</p>
+      </div>
+
+      <div class="toolbar">
+        <div class="search">
+          <label class="tiny" for="searchInput">Search</label>
+          <input id="searchInput" type="search" placeholder="Search projects by title, tag, or description…" />
+        </div>
+        <div class="filters" role="tablist" aria-label="Project filters">
+          <button class="chip active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="chip" data-filter="web">Web</button>
+          <button class="chip" data-filter="mobile">Mobile</button>
+          <button class="chip" data-filter="design">Design</button>
+          <button class="chip" data-filter="open-source">Open Source</button>
+        </div>
+      </div>
+
+      <div class="grid" id="projectGrid" aria-live="polite"></div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" aria-labelledby="about-title">
+      <div class="section-header">
+        <h2 id="about-title">About</h2>
+        <p>A bit about me and how I work.</p>
+      </div>
+      <div class="about">
+        <article class="panel">
+          <h3 style="margin-top:0">Who I am</h3>
+          <p>I, Kyle Adrian Centeno, am someone who values growth, curiosity, and meaningful connections. I enjoy working with others, learning from new experiences, and finding creative ways to approach challenges. Every opportunity I take on helps me grow not only in skills but also as a person — more responsible, collaborative, and open to new perspectives.</p>
+          <ul>
+            <li>🌱 I’m always eager to learn and grow from new experiences.</li>
+            <li>🤝 I value teamwork and enjoy collaborating with others to achieve goals.</li>
+            <li>🎯 I pay attention to the little things, knowing they make a big difference.</li>
+          </ul>
+        </article>
+        <aside class="panel">
+          <h3 style="margin-top:0">Skills</h3>
+          <div class="skills" id="skills"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===== EXPERIENCE ===== --
+    <section id="experience" aria-labelledby="exp-title">
+      <div class="section-header">
+        <h2 id="exp-title">Experience</h2>
+        <p>Roles and highlights.</p>
+      </div>
+      <div class="panel">
+        <div class="timeline" id="timeline"></div>
+      </div>
+    </section>
+    -->
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="section-header">
+        <h2 id="contact-title">Contact</h2>
+        <p>Let’s build something great together.</p>
+      </div>
+      <div class="about">
+        <form id="contactForm" class="panel" novalidate>
+          <div>
+            <label class="tiny" for="name">Name</label>
+            <input id="name" name="name" autocomplete="name" required placeholder="Your full name" />
+          </div>
+          <div>
+            <label class="tiny" for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com" />
+          </div>
+          <div>
+            <label class="tiny" for="subject">Subject</label>
+            <input id="subject" name="subject" required placeholder="Project inquiry" />
+          </div>
+          <div>
+            <label class="tiny" for="message">Message</label>
+            <textarea id="message" name="message" required placeholder="Tell me about your project, timeline, and goals…"></textarea>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <input type="submit" class="btn" value="Send message" />
+            <span id="formStatus" class="tiny" role="status" aria-live="polite"></span>
+          </div>
+        </form>
+
+        <aside class="panel">
+          <h3 style="margin-top:0">Elsewhere</h3>
+          <ul style="margin:0; padding-left: 18px;">
+            <li><a href="https://github.com/kaiiiew">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/kyle-adrian-centeno-1838b233b/">LinkedIn</a></li>
+            <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=kyleadrian.centeno@email.lcup.edu.ph&su=Portfolio%20Inquiry&body=Hello%20Kyle," target="_blank">Email</a></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+        <p style="margin:0">© <span id="year"></span> Centeno, Kyle. All rights reserved.</p>
+        <a href="#home" class="btn ghost">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== MODAL (Project details) ===== -->
+  <dialog id="projectModal" style="border:0; border-radius: 18px; padding:0; width:min(860px, 96%); background: var(--panel); color: var(--text); box-shadow: var(--shadow);">
+    <div style="padding: 16px 16px 0; display:flex; justify-content:space-between; align-items:center; gap:8px; border-bottom:1px solid color-mix(in oklab, var(--text) 10%, transparent)">
+      <h3 id="modalTitle" style="margin:0"></h3>
+      <form method="dialog"><button class="btn ghost" aria-label="Close">✕</button></form>
+    </div>
+    <div class="modal-content">
+      <div class="modal-details">
+        <p id="modalDesc" class="tiny" style="color:var(--text)"></p>
+        <div id="modalTags" style="display:flex; gap:10px; flex-wrap:wrap;"></div>
+        <div class="media-row">
+          <div id="modalVideo"></div>
+          <div class="media-images">
+            <div id="modalMainImg"></div>
+            <div id="modalThumbs" class="thumbs-row"></div>
+          </div>
+        </div>
+        <div class="actions" style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a id="modalLive" class="btn" href="#" target="_blank" rel="noopener">Live Demo</a>
+          <a id="modalCode" class="btn ghost" href="#" target="_blank" rel="noopener">Source Code</a>
+        </div>
+      </div>
+    </div>
+  </dialog>
+</body>
+</html>

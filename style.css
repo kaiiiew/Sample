@@ -112,7 +112,58 @@
     .titem { position: relative; padding: 10px 0 10px 8px; }
     .titem::before { content: ""; position: absolute; left: -2px; top: 14px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--ring); }
 
-    /* ===== CONTACT ===== */
+    /* Place the purple circle inside the experience container */
+#experience .panel .titem::before {
+  left: 10px; /* Move the circle inside the card */
+  top: 18px;
+  /* You can adjust left/top for perfect alignment */
+}
+
+/* Adjust padding so the circle doesn't overflow */
+#experience .panel .titem {
+  padding-left: 32px;
+  position: relative;
+}
+
+/* Make experience container vertically scrollable and show 4 items at a time */
+#experience .panel {
+  max-height: 520px; /* Adjust height as needed for 4 items */
+  overflow-y: auto;
+  padding-bottom: 8px;
+  background: var(--panel);
+}
+
+/* Timeline as vertical list */
+#timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Timeline item styling */
+.titem {
+  background: var(--panel);
+  border-radius: 14px;
+  border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+  padding: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  flex-shrink: 0;
+}
+
+/* Optional: Hide vertical timeline line if not needed */
+#timeline::before {
+  display: none;
+}
+
+/* Responsive: allow full height on mobile */
+@media (max-width: 700px) {
+  #experience .panel {
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+/* ===== CONTACT ===== */
 
     form {
       display: grid;
@@ -326,4 +377,45 @@
       .hero, .about { grid-template-columns: 1fr; }
       .hero .actions { flex-wrap: wrap; }
     }
+
+/* Social icons layout */
+.social-list {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0 0;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.social-list li a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 1.08rem;
+  transition: color 0.2s;
+}
+
+.social-list li a:hover,
+.social-list li a:focus {
+  color: var(--accent);
+}
+
+.social-icon {
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  filter: grayscale(0) brightness(1);
+  transition: filter 0.2s, transform 0.2s;
+}
+
+.social-list li a:hover .social-icon,
+.social-list li a:focus .social-icon {
+  filter: drop-shadow(0 2px 8px var(--accent)) brightness(1.2);
+  transform: scale(1.12);
+}
 

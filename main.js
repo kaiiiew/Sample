@@ -192,9 +192,19 @@ if (skillsList) {
 
 // ===== EXPERIENCE TIMELINE =====
 const ROLES = [
-  { when: '2024 — Present', title: 'Front‑end Engineer', org: 'Acme Corp', bullets: ['Built component library adopted across 5 teams','Improved LCP by 43% via code‑splitting & image optimization','Led accessibility audit to WCAG 2.2 AA'] },
-  { when: '2022 — 2024', title: 'UI Developer', org: 'Startup XYZ', bullets: ['Shipped 12+ features with 0 regressions','Designed and implemented design tokens system','Mentored 3 junior devs'] },
-  { when: '2020 — 2022', title: 'Web Developer', org: 'Freelance', bullets: ['Delivered sites for SMEs with 98+ Lighthouse','Integrated Stripe & CMS workflows','Automated deployments with CI/CD'] }
+  { when: '2023', title: 'Secretary', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['From Pixels to Perfection: Unleashing Creativity in Game Development and Graphic Designing.'] },
+  { when: '2023', title: 'Secretary', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['IT Trends Navigating the Ever - Changing Digital Landscape.'] },
+  { when: '2023', title: 'Support Committee', org: 'Philippine Society of Information Technology Educators - PSITE', bullets: ['Regional Assembly on Information Technology Education 2023 - RAITE 2023.'] },
+  { when: '2023 - 2024', title: 'Secretary', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['Former Organizational - Secretary'] },
+  { when: '2024', title: 'Technical Writing Participant', org: 'Philippine Society of Information Technology Educators - PSITE', bullets: ['International Research Conference on Information Technology Education - IRCITE 2024.'] },
+  { when: '2024', title: 'Committee', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['St. Elined Foundation Inc. Outreach Program.'] },
+  { when: '2024', title: 'Shirt Layout Participant', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['Organizationl T - Shirt Layout Competition.'] },
+  { when: '2024', title: 'Committee', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['Coding for Impact: Leveraging Technology to Solve Real-World Challenges.'] },
+  { when: '2024', title: 'Committee', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['Ethical Hacking: Juggling Technology and Morality.'] },
+  { when: '2024', title: 'Committee', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['Stream your Ideas: A new era of content creation with OBS Studio. '] },
+  { when: '2024', title: 'Committee', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['Smart Solutions: AI Tools for Business, Education, and Innovation.'] },
+  { when: '2024', title: 'Committee', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['Click, Code, Secure, Discover: A Hands-On Tech Adventure.'] },
+  { when: '2025', title: 'Committee', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['Pushing Tech Limits.'] }
 ];
 
 const timeline = $('#timeline');

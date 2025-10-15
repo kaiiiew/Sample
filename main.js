@@ -35,15 +35,32 @@ const PROJECTS = [
     desc: 'A lightweight Godot minigame with replayability and accessibility built in',
     live: '#',
     code: '#',
-    thumb: 'banner.jpg', // <-- Independent thumbnail image
-    images: [
-      'Ui.jpg',
-      '1.jpg',
-      '2.jpg',
-      '3.jpg'
-    ],
-    video: 'game.mp4'
-  }
+    // <-- Independent thumbnail image
+      images: [
+        'Ui.jpg',
+        '1.jpg',
+        '2.jpg',
+        '3.jpg'
+      ],
+      video: 'game.mp4'
+      }
+      ,{
+      id: 2,
+      title: 'Events LCUP Website',
+      kind: 'Web', // <-- matches 'design' chip
+      tags: ['Wordpress','Web','Hostinger'],
+      desc: 'EventsLCUP is the official hub for all events happening at La Consolacion University Philippines.',
+      live: '#',
+      code: '#',
+      thumb: 'E1.jpg', // <-- Independent thumbnail image
+      images: [
+        'E1.jpg',
+        'E2.jpg',
+        'E3.jpg'
+      ],
+      // Make modal/project display bigger by adding a new property
+      displaySize: 'large' // You can use this in your modal CSS/JS to set a larger size
+      }
   // Add more projects here if needed
 ];
 
@@ -82,7 +99,8 @@ let activeFilter = 'all';
 function applyFilters() {
   const q = searchInput && searchInput.value ? searchInput.value.toLowerCase().trim() : '';
   const filtered = PROJECTS.filter(p => {
-    const matchesFilter = activeFilter === 'all' || p.kind === activeFilter;
+    const kind = (p.kind || '').toLowerCase();
+    const matchesFilter = activeFilter === 'all' || kind === activeFilter;
     const matchesText = !q || [p.title, p.desc, ...(p.tags||[])].join(' ').toLowerCase().includes(q);
     return matchesFilter && matchesText;
   });
@@ -249,3 +267,47 @@ const onScroll = () => {
 };
 document.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
+
+// Certification image modal logic
+const certImgs = $$('.cert-view-img');
+const certImgModal = $('#certImgModal');
+const certImgModalImg = $('#certImgModalImg');
+const certImgModalClose = $('.img-modal-close');
+
+certImgs.forEach(img => {
+  img.addEventListener('click', () => {
+    certImgModalImg.src = img.src;
+    certImgModal.style.display = 'flex';
+    certImgModal.focus();
+  });
+  img.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      certImgModalImg.src = img.src;
+      certImgModal.style.display = 'flex';
+      certImgModal.focus();
+    }
+  });
+});
+
+if (certImgModalClose) {
+  certImgModalClose.addEventListener('click', () => {
+    certImgModal.style.display = 'none';
+    certImgModalImg.src = '';
+  });
+  certImgModalClose.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      certImgModal.style.display = 'none';
+      certImgModalImg.src = '';
+    }
+  });
+}
+
+// Close modal when clicking outside image
+if (certImgModal) {
+  certImgModal.addEventListener('click', (e) => {
+    if (e.target === certImgModal) {
+      certImgModal.style.display = 'none';
+      certImgModalImg.src = '';
+    }
+  });
+}

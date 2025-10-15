@@ -25,6 +25,8 @@
           <li><a href="#projects">Projects</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#experience">Experience</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#certifications">Certificate</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -95,9 +97,9 @@
         </div>
         <div class="filters" role="tablist" aria-label="Project filters">
           <button class="chip active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="chip" data-filter="design">Design</button>
           <button class="chip" data-filter="web">Web</button>
           <button class="chip" data-filter="mobile">Mobile</button>
-          <button class="chip" data-filter="design">Design</button>
           <button class="chip" data-filter="open-source">Open Source</button>
         </div>
       </div>
@@ -128,6 +130,46 @@
       </div>
     </section>
 
+    <!-- ===== EDUCATION ===== -->
+    <!-- Add school logo to each education entry -->
+    <section id="education" aria-labelledby="education-title">
+      <div class="section-header">
+        <h2 id="education-title">Educational Background</h2>
+        <p>Academic history and achievements.</p>
+      </div>
+      <div class="education-list">
+        <article class="panel">
+          <div style="display:flex; align-items:center; gap:18px;">
+            <img src="LCUP.png" alt="LCUP Logo" style="width:56px; height:56px; border-radius:12px; object-fit:cover;">
+            <div>
+              <h3>La Consolacion University Philippines</h3>
+              <p class="tiny">Bachelor of Science in Information Technology · 2022–Present</p>
+            </div>
+          </div>
+          <ul style="margin-top:10px;">
+            <li>3rd year Dean’s Lister (2024–2025)</li>
+            <li>2nd year Dean’s Lister (2023–2024)</li>
+            <li>1st year Dean’s Lister (2022–2023)</li>
+            <li>Active member, Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE</li>
+            <li>Relevant coursework: Web Development, UI/UX, Database Systems</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <div style="display:flex; align-items:center; gap:18px;">
+            <img src="BES.png" alt="LCUP Logo" style="width:56px; height:56px; border-radius:12px; object-fit:cover;">
+            <div>
+              <h3>Bulacan Ecumenical School Senior High</h3>
+              <p class="tiny">STEM Strand · Graduated 2021-2022</p>
+            </div>
+          </div>
+          <ul style="margin-top:10px;">
+            <li>Graduated with Honors</li>
+          </ul>
+        </article>
+        <!-- Add more schools or achievements as needed -->
+      </div>
+    </section>
+
     <!-- ===== EXPERIENCE ===== -->
     <section id="experience" aria-labelledby="exp-title">
       <div class="section-header">
@@ -136,6 +178,29 @@
       </div>
       <div class="panel">
         <div class="timeline" id="timeline"></div>
+      </div>
+    </section>
+
+    <!-- ===== CERTIFICATIONS ===== -->
+    <section id="certifications" aria-labelledby="cert-title">
+      <div class="section-header">
+        <h2 id="cert-title">Certifications</h2>
+        <p>Professional and academic certifications earned.</p>
+      </div>
+      <div class="cert-list">
+        <article class="panel cert-card">
+          <div class="cert-grid">
+            <div class="cert-img">
+              <img src="Cert.png" alt="Microsoft Office Specialist Certificate" class="cert-view-img" tabindex="0">
+            </div>
+            <div class="cert-info">
+              <h3>Microsoft Office Specialist Certificate</h3>
+              <p class="tiny">Microsoft Excel (Office 2019)</p>
+              <p>I've just finished a comprehensive program where I focused on a wide range of essential IT skills. I'm now proficient in troubleshooting and providing great customer service, with a solid foundation in networking and operating systems. I also gained valuable experience in system administration and fundamental security principles.</p>
+            </div>
+          </div>
+        </article>
+        <!-- Add more certifications as needed -->
       </div>
     </section>
     
@@ -229,5 +294,11 @@
       </div>
     </div>
   </dialog>
+
+  <!-- ===== MODAL (Certification image) ===== -->
+  <div id="certImgModal" class="img-modal" tabindex="-1" style="display:none;">
+    <span class="img-modal-close" tabindex="0" aria-label="Close image">&times;</span>
+    <img id="certImgModalImg" src="" alt="Certification" />
+  </div>
 </body>
 </html>

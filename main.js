@@ -250,7 +250,7 @@ if (form && statusEl) {
     }
 
     try {
-      const res = await fetch('http://localhost:5500/api/send-contact', {
+      const res = await fetch('http://localhost:3000/api/send-contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -273,59 +273,96 @@ if (form && statusEl) {
 
 // ===== NAV ACTIVE STATE ON SCROLL =====
 const sections = ['home', 'projects', 'about', 'education', 'experience', 'contact']
-    .map(id => document.getElementById(id))
-    .filter(Boolean);
-  const links = $$('header nav a');
-  const onScroll = () => {
-    const y = window.scrollY + 120;
-    let current = sections.length ? sections[0].id : '';
-    sections.forEach(sec => { if (sec.offsetTop <= y) current = sec.id; });
-    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
-  };
-  document.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  .map(id => document.getElementById(id))
+  .filter(Boolean);
+const links = $$('header nav a');
+const onScroll = () => {
+  const y = window.scrollY + 120;
+  let current = sections.length ? sections[0].id : '';
+  sections.forEach(sec => { if (sec.offsetTop <= y) current = sec.id; });
+  links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+};
+document.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
-  // Certification image modal logic
-  const certImgs = $$('.cert-view-img');
-  const certImgModal = $('#certImgModal');
-  const certImgModalImg = $('#certImgModalImg');
-  const certImgModalClose = $('.img-modal-close');
+// Certification image modal logic
+const certImgs = $$('.cert-view-img');
+const certImgModal = $('#certImgModal');
+const certImgModalImg = $('#certImgModalImg');
+const certImgModalClose = $('.img-modal-close');
 
-  certImgs.forEach(img => {
-    img.addEventListener('click', () => {
+certImgs.forEach(img => {
+  img.addEventListener('click', () => {
+    certImgModalImg.src = img.src;
+    certImgModal.style.display = 'flex';
+    certImgModal.focus();
+  });
+  img.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
       certImgModalImg.src = img.src;
       certImgModal.style.display = 'flex';
       certImgModal.focus();
-    });
-    img.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        certImgModalImg.src = img.src;
-        certImgModal.style.display = 'flex';
-        certImgModal.focus();
-      }
-    });
+    }
   });
+});
 
-  if (certImgModalClose) {
-    certImgModalClose.addEventListener('click', () => {
+if (certImgModalClose) {
+  certImgModalClose.addEventListener('click', () => {
+    certImgModal.style.display = 'none';
+    certImgModalImg.src = '';
+  });
+  certImgModalClose.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
       certImgModal.style.display = 'none';
       certImgModalImg.src = '';
-    });
-    certImgModalClose.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        certImgModal.style.display = 'none';
-        certImgModalImg.src = '';
-      }
-    });
+    }
+  });
+}
+
+// Close modal when clicking outside image
+if (certImgModal) {
+  certImgModal.addEventListener('click', (e) => {
+    if (e.target === certImgModal) {
+      certImgModal.style.display = 'none';
+      certImgModalImg.src = '';
+    }
+  });
+}
+
+// ===== NAV TOGGLE (responsive dropdown) =====
+const navToggle = $('#navToggle');
+const primaryNav = $('#primaryNav');
+
+if (navToggle && primaryNav) {
+  function setNavOpen(open) {
+    navToggle.classList.toggle('open', open);
+    primaryNav.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
 
-  // Close modal when clicking outside image
-  if (certImgModal) {
-    certImgModal.addEventListener('click', (e) => {
-      if (e.target === certImgModal) {
-        certImgModal.style.display = 'none';
-        certImgModalImg.src = '';
-      }
-    });
-  }
+  navToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setNavOpen(!primaryNav.classList.contains('open'));
+  });
+
+  // Close when clicking a link
+  $$('#primaryNav a').forEach(a => a.addEventListener('click', () => setNavOpen(false)));
+
+  // Close when clicking outside the nav (on small screens)
+  document.addEventListener('click', (e) => {
+    if (!primaryNav.classList.contains('open')) return;
+    const inside = primaryNav.contains(e.target) || navToggle.contains(e.target);
+    if (!inside) setNavOpen(false);
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setNavOpen(false);
+  });
+
+  // Ensure nav closes when resizing to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) setNavOpen(false);
+  });
+}
 

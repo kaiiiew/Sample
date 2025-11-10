@@ -255,7 +255,7 @@ if (form && statusEl) {
 }
 
 // ===== NAV ACTIVE STATE ON SCROLL =====
-const sections = ['home','projects','about','experience','contact']
+const sections = ['home','projects','about','education','experience','contact']
   .map(id=>document.getElementById(id))
   .filter(Boolean);
 const links = $$('header nav a');

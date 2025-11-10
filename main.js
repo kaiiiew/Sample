@@ -1,6 +1,6 @@
 // ===== UTILITIES =====
-const $ = (sel, parent=document) => parent.querySelector(sel);
-const $$ = (sel, parent=document) => [...parent.querySelectorAll(sel)];
+const $ = (sel, parent = document) => parent.querySelector(sel);
+const $$ = (sel, parent = document) => [...parent.querySelectorAll(sel)];
 
 // ===== THEME TOGGLE =====
 const themeToggle = $('#themeToggle');
@@ -31,36 +31,36 @@ const PROJECTS = [
     id: 1,
     title: 'Sige Talong - MiniGame',
     kind: 'Design',
-    tags: ['Gogot','Design System','MiniGame'],
+    tags: ['Gogot', 'Design System', 'MiniGame'],
     desc: 'A lightweight Godot minigame with replayability and accessibility built in',
     live: '#',
     code: '#',
     // <-- Independent thumbnail image
-      images: [
-        'Ui.jpg',
-        '1.jpg',
-        '2.jpg',
-        '3.jpg'
-      ],
-      video: 'game.mp4'
-      }
-      ,{
-      id: 2,
-      title: 'Events LCUP Website',
-      kind: 'Web', // <-- matches 'design' chip
-      tags: ['Wordpress','Web','Hostinger'],
-      desc: 'EventsLCUP is the official hub for all events happening at La Consolacion University Philippines.',
-      live: '#',
-      code: '#',
-      thumb: 'E1.jpg', // <-- Independent thumbnail image
-      images: [
-        'E1.jpg',
-        'E2.jpg',
-        'E3.jpg'
-      ],
-      // Make modal/project display bigger by adding a new property
-      displaySize: 'large' // You can use this in your modal CSS/JS to set a larger size
-      }
+    images: [
+      'Ui.jpg',
+      '1.jpg',
+      '2.jpg',
+      '3.jpg'
+    ],
+    video: 'game.mp4'
+  }
+  , {
+    id: 2,
+    title: 'Events LCUP Website',
+    kind: 'Web', // <-- matches 'design' chip
+    tags: ['Wordpress', 'Web', 'Hostinger'],
+    desc: 'EventsLCUP is the official hub for all events happening at La Consolacion University Philippines.',
+    live: '#',
+    code: '#',
+    thumb: 'E1.jpg', // <-- Independent thumbnail image
+    images: [
+      'E1.jpg',
+      'E2.jpg',
+      'E3.jpg'
+    ],
+    // Make modal/project display bigger by adding a new property
+    displaySize: 'large' // You can use this in your modal CSS/JS to set a larger size
+  }
   // Add more projects here if needed
 ];
 
@@ -77,15 +77,15 @@ function renderProjects(list) {
     card.innerHTML = `
       <div class="thumb" aria-hidden="true">
         ${p.thumb ? `<img src="${p.thumb}" alt="${p.title} thumbnail" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">`
-          : (p.images && p.images.length ? `<img src="${p.images[0]}" alt="${p.title} thumbnail" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">` : p.title[0])}
+        : (p.images && p.images.length ? `<img src="${p.images[0]}" alt="${p.title} thumbnail" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">` : p.title[0])}
       </div>
       <h3>${p.title}</h3>
       <p>${p.desc}</p>
-      <div class="tags">${p.tags.map(t=>`<span class='chip'>${t}</span>`).join('')}</div>
+      <div class="tags">${p.tags.map(t => `<span class='chip'>${t}</span>`).join('')}</div>
       <div class="tiny" style="margin-top:8px">${p.kind}</div>
     `;
-    card.addEventListener('click', ()=> openProject(p));
-    card.addEventListener('keypress', (e)=>{ if(e.key==='Enter') openProject(p); });
+    card.addEventListener('click', () => openProject(p));
+    card.addEventListener('keypress', (e) => { if (e.key === 'Enter') openProject(p); });
     grid.appendChild(card);
   });
 }
@@ -101,7 +101,7 @@ function applyFilters() {
   const filtered = PROJECTS.filter(p => {
     const kind = (p.kind || '').toLowerCase();
     const matchesFilter = activeFilter === 'all' || kind === activeFilter;
-    const matchesText = !q || [p.title, p.desc, ...(p.tags||[])].join(' ').toLowerCase().includes(q);
+    const matchesText = !q || [p.title, p.desc, ...(p.tags || [])].join(' ').toLowerCase().includes(q);
     return matchesFilter && matchesText;
   });
   renderProjects(filtered);
@@ -130,7 +130,7 @@ function openProject(p) {
   if (!modal || !modalTitle || !modalDesc || !modalTags || !modalLive || !modalCode) return;
   modalTitle.textContent = p.title;
   modalDesc.textContent = p.desc;
-  modalTags.innerHTML = (p.tags||[]).map(t=>`<span class='chip active'>${t}</span>`).join('');
+  modalTags.innerHTML = (p.tags || []).map(t => `<span class='chip active'>${t}</span>`).join('');
   modalLive.href = p.live || '#';
   modalCode.href = p.code || '#';
 
@@ -160,7 +160,7 @@ function openProject(p) {
 
   if (modalThumbs && p.images && p.images.length) {
     modalThumbs.innerHTML = p.images.map((src, i) =>
-      `<img src="${src}" alt="Screenshot ${i+1}" ${i===0?'class="active"':''} />`
+      `<img src="${src}" alt="Screenshot ${i + 1}" ${i === 0 ? 'class="active"' : ''} />`
     ).join('');
     showImg(0);
     // Add click event to thumbs
@@ -230,84 +230,102 @@ if (timeline) {
   ROLES.forEach(r => {
     const item = document.createElement('div');
     item.className = 'titem';
-    item.innerHTML = `<div class='tiny' style='color:var(--muted)'>${r.when}</div><h3 style='margin:.2rem 0'>${r.title} · ${r.org}</h3><ul>${r.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>`;
+    item.innerHTML = `<div class='tiny' style='color:var(--muted)'>${r.when}</div><h3 style='margin:.2rem 0'>${r.title} · ${r.org}</h3><ul>${r.bullets.map(b => `<li>${b}</li>`).join('')}</ul>`;
     timeline.appendChild(item);
   });
 }
 
-// ===== CONTACT FORM (client-side only) =====
+// ===== CONTACT FORM (client -> server) =====
 const form = $('#contactForm');
 const statusEl = $('#formStatus');
 if (form && statusEl) {
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    statusEl.textContent = 'Sending…';
+
     const data = Object.fromEntries(new FormData(form).entries());
     if (!data.name || !data.email || !data.subject || !data.message) {
       statusEl.textContent = 'Please complete all fields.';
       return;
     }
-    statusEl.textContent = 'Sending…';
-    setTimeout(() => {
-      statusEl.textContent = 'Thanks! I will get back to you shortly.';
-      form.reset();
-    }, 800);
+
+    try {
+      const res = await fetch('http://localhost:5500/api/send-contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const json = await res.json();
+
+      if (res.ok && json.success) {
+        statusEl.textContent = json.message || '✅ Message sent successfully!';
+        form.reset();
+      } else {
+        statusEl.textContent = json.message || '❌ Unable to send message.';
+      }
+    } catch (err) {
+      console.error('❌ Network error:', err);
+      statusEl.textContent = '⚠️ Network error — please try again later.';
+    }
   });
 }
 
 // ===== NAV ACTIVE STATE ON SCROLL =====
-const sections = ['home','projects','about','education','experience','contact']
-  .map(id=>document.getElementById(id))
-  .filter(Boolean);
-const links = $$('header nav a');
-const onScroll = () => {
-  const y = window.scrollY + 120;
-  let current = sections.length ? sections[0].id : '';
-  sections.forEach(sec => { if (sec.offsetTop <= y) current = sec.id; });
-  links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
-};
-document.addEventListener('scroll', onScroll, { passive: true });
-onScroll();
+const sections = ['home', 'projects', 'about', 'education', 'experience', 'contact']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+  const links = $$('header nav a');
+  const onScroll = () => {
+    const y = window.scrollY + 120;
+    let current = sections.length ? sections[0].id : '';
+    sections.forEach(sec => { if (sec.offsetTop <= y) current = sec.id; });
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  };
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
-// Certification image modal logic
-const certImgs = $$('.cert-view-img');
-const certImgModal = $('#certImgModal');
-const certImgModalImg = $('#certImgModalImg');
-const certImgModalClose = $('.img-modal-close');
+  // Certification image modal logic
+  const certImgs = $$('.cert-view-img');
+  const certImgModal = $('#certImgModal');
+  const certImgModalImg = $('#certImgModalImg');
+  const certImgModalClose = $('.img-modal-close');
 
-certImgs.forEach(img => {
-  img.addEventListener('click', () => {
-    certImgModalImg.src = img.src;
-    certImgModal.style.display = 'flex';
-    certImgModal.focus();
-  });
-  img.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+  certImgs.forEach(img => {
+    img.addEventListener('click', () => {
       certImgModalImg.src = img.src;
       certImgModal.style.display = 'flex';
       certImgModal.focus();
-    }
+    });
+    img.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        certImgModalImg.src = img.src;
+        certImgModal.style.display = 'flex';
+        certImgModal.focus();
+      }
+    });
   });
-});
 
-if (certImgModalClose) {
-  certImgModalClose.addEventListener('click', () => {
-    certImgModal.style.display = 'none';
-    certImgModalImg.src = '';
-  });
-  certImgModalClose.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+  if (certImgModalClose) {
+    certImgModalClose.addEventListener('click', () => {
       certImgModal.style.display = 'none';
       certImgModalImg.src = '';
-    }
-  });
-}
+    });
+    certImgModalClose.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        certImgModal.style.display = 'none';
+        certImgModalImg.src = '';
+      }
+    });
+  }
 
-// Close modal when clicking outside image
-if (certImgModal) {
-  certImgModal.addEventListener('click', (e) => {
-    if (e.target === certImgModal) {
-      certImgModal.style.display = 'none';
-      certImgModalImg.src = '';
-    }
-  });
-}
+  // Close modal when clicking outside image
+  if (certImgModal) {
+    certImgModal.addEventListener('click', (e) => {
+      if (e.target === certImgModal) {
+        certImgModal.style.display = 'none';
+        certImgModalImg.src = '';
+      }
+    });
+  }
+

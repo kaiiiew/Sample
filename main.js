@@ -1,6 +1,6 @@
 // ===== UTILITIES =====
-const $ = (sel, parent=document) => parent.querySelector(sel);
-const $$ = (sel, parent=document) => [...parent.querySelectorAll(sel)];
+const $ = (sel, parent = document) => parent.querySelector(sel);
+const $$ = (sel, parent = document) => [...parent.querySelectorAll(sel)];
 
 // ===== THEME TOGGLE =====
 const themeToggle = $('#themeToggle');
@@ -31,11 +31,11 @@ const PROJECTS = [
     id: 1,
     title: 'Sige Talong - MiniGame',
     kind: 'Design',
-    tags: ['Gogot','Design System','MiniGame'],
+    tags: ['Gogot', 'Design System', 'MiniGame'],
     desc: 'A lightweight Godot minigame with replayability and accessibility built in',
     live: '#',
     code: '#',
-    thumb: 'banner.jpg', // <-- Independent thumbnail image
+    // <-- Independent thumbnail image
     images: [
       'Ui.jpg',
       '1.jpg',
@@ -43,6 +43,23 @@ const PROJECTS = [
       '3.jpg'
     ],
     video: 'game.mp4'
+  }
+  , {
+    id: 2,
+    title: 'Events LCUP Website',
+    kind: 'Web', // <-- matches 'design' chip
+    tags: ['Wordpress', 'Web', 'Hostinger'],
+    desc: 'EventsLCUP is the official hub for all events happening at La Consolacion University Philippines.',
+    live: '#',
+    code: '#',
+    thumb: 'E1.jpg', // <-- Independent thumbnail image
+    images: [
+      'E1.jpg',
+      'E2.jpg',
+      'E3.jpg'
+    ],
+    // Make modal/project display bigger by adding a new property
+    displaySize: 'large' // You can use this in your modal CSS/JS to set a larger size
   }
   // Add more projects here if needed
 ];
@@ -60,15 +77,15 @@ function renderProjects(list) {
     card.innerHTML = `
       <div class="thumb" aria-hidden="true">
         ${p.thumb ? `<img src="${p.thumb}" alt="${p.title} thumbnail" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">`
-          : (p.images && p.images.length ? `<img src="${p.images[0]}" alt="${p.title} thumbnail" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">` : p.title[0])}
+        : (p.images && p.images.length ? `<img src="${p.images[0]}" alt="${p.title} thumbnail" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">` : p.title[0])}
       </div>
       <h3>${p.title}</h3>
       <p>${p.desc}</p>
-      <div class="tags">${p.tags.map(t=>`<span class='chip'>${t}</span>`).join('')}</div>
+      <div class="tags">${p.tags.map(t => `<span class='chip'>${t}</span>`).join('')}</div>
       <div class="tiny" style="margin-top:8px">${p.kind}</div>
     `;
-    card.addEventListener('click', ()=> openProject(p));
-    card.addEventListener('keypress', (e)=>{ if(e.key==='Enter') openProject(p); });
+    card.addEventListener('click', () => openProject(p));
+    card.addEventListener('keypress', (e) => { if (e.key === 'Enter') openProject(p); });
     grid.appendChild(card);
   });
 }
@@ -82,8 +99,9 @@ let activeFilter = 'all';
 function applyFilters() {
   const q = searchInput && searchInput.value ? searchInput.value.toLowerCase().trim() : '';
   const filtered = PROJECTS.filter(p => {
-    const matchesFilter = activeFilter === 'all' || p.kind === activeFilter;
-    const matchesText = !q || [p.title, p.desc, ...(p.tags||[])].join(' ').toLowerCase().includes(q);
+    const kind = (p.kind || '').toLowerCase();
+    const matchesFilter = activeFilter === 'all' || kind === activeFilter;
+    const matchesText = !q || [p.title, p.desc, ...(p.tags || [])].join(' ').toLowerCase().includes(q);
     return matchesFilter && matchesText;
   });
   renderProjects(filtered);
@@ -112,7 +130,7 @@ function openProject(p) {
   if (!modal || !modalTitle || !modalDesc || !modalTags || !modalLive || !modalCode) return;
   modalTitle.textContent = p.title;
   modalDesc.textContent = p.desc;
-  modalTags.innerHTML = (p.tags||[]).map(t=>`<span class='chip active'>${t}</span>`).join('');
+  modalTags.innerHTML = (p.tags || []).map(t => `<span class='chip active'>${t}</span>`).join('');
   modalLive.href = p.live || '#';
   modalCode.href = p.code || '#';
 
@@ -142,7 +160,7 @@ function openProject(p) {
 
   if (modalThumbs && p.images && p.images.length) {
     modalThumbs.innerHTML = p.images.map((src, i) =>
-      `<img src="${src}" alt="Screenshot ${i+1}" ${i===0?'class="active"':''} />`
+      `<img src="${src}" alt="Screenshot ${i + 1}" ${i === 0 ? 'class="active"' : ''} />`
     ).join('');
     showImg(0);
     // Add click event to thumbs
@@ -192,9 +210,19 @@ if (skillsList) {
 
 // ===== EXPERIENCE TIMELINE =====
 const ROLES = [
-  { when: '2024 — Present', title: 'Front‑end Engineer', org: 'Acme Corp', bullets: ['Built component library adopted across 5 teams','Improved LCP by 43% via code‑splitting & image optimization','Led accessibility audit to WCAG 2.2 AA'] },
-  { when: '2022 — 2024', title: 'UI Developer', org: 'Startup XYZ', bullets: ['Shipped 12+ features with 0 regressions','Designed and implemented design tokens system','Mentored 3 junior devs'] },
-  { when: '2020 — 2022', title: 'Web Developer', org: 'Freelance', bullets: ['Delivered sites for SMEs with 98+ Lighthouse','Integrated Stripe & CMS workflows','Automated deployments with CI/CD'] }
+  { when: '2023', title: 'Secretary', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['From Pixels to Perfection: Unleashing Creativity in Game Development and Graphic Designing.'] },
+  { when: '2023', title: 'Secretary', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['IT Trends Navigating the Ever - Changing Digital Landscape.'] },
+  { when: '2023', title: 'Support Committee', org: 'Philippine Society of Information Technology Educators - PSITE', bullets: ['Regional Assembly on Information Technology Education 2023 - RAITE 2023.'] },
+  { when: '2023 - 2024', title: 'Secretary', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['Former Organizational - Secretary'] },
+  { when: '2024', title: 'Technical Writing Participant', org: 'Philippine Society of Information Technology Educators - PSITE', bullets: ['International Research Conference on Information Technology Education - IRCITE 2024.'] },
+  { when: '2024', title: 'Committee', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['St. Elined Foundation Inc. Outreach Program.'] },
+  { when: '2024', title: 'Shirt Layout Participant', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['Organizationl T - Shirt Layout Competition.'] },
+  { when: '2024', title: 'Committee', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['Coding for Impact: Leveraging Technology to Solve Real-World Challenges.'] },
+  { when: '2024', title: 'Committee', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['Ethical Hacking: Juggling Technology and Morality.'] },
+  { when: '2024', title: 'Committee', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['Stream your Ideas: A new era of content creation with OBS Studio. '] },
+  { when: '2024', title: 'Committee', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['Smart Solutions: AI Tools for Business, Education, and Innovation.'] },
+  { when: '2024', title: 'Committee', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['Click, Code, Secure, Discover: A Hands-On Tech Adventure.'] },
+  { when: '2025', title: 'Committee', org: 'Junior Philippine Student Society for Information Technology Education LCUP - JPSSITE', bullets: ['Pushing Tech Limits.'] }
 ];
 
 const timeline = $('#timeline');
@@ -202,33 +230,50 @@ if (timeline) {
   ROLES.forEach(r => {
     const item = document.createElement('div');
     item.className = 'titem';
-    item.innerHTML = `<div class='tiny' style='color:var(--muted)'>${r.when}</div><h3 style='margin:.2rem 0'>${r.title} · ${r.org}</h3><ul>${r.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>`;
+    item.innerHTML = `<div class='tiny' style='color:var(--muted)'>${r.when}</div><h3 style='margin:.2rem 0'>${r.title} · ${r.org}</h3><ul>${r.bullets.map(b => `<li>${b}</li>`).join('')}</ul>`;
     timeline.appendChild(item);
   });
 }
 
-// ===== CONTACT FORM (client-side only) =====
+// ===== CONTACT FORM (client -> server) =====
 const form = $('#contactForm');
 const statusEl = $('#formStatus');
 if (form && statusEl) {
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    statusEl.textContent = 'Sending…';
+
     const data = Object.fromEntries(new FormData(form).entries());
     if (!data.name || !data.email || !data.subject || !data.message) {
       statusEl.textContent = 'Please complete all fields.';
       return;
     }
-    statusEl.textContent = 'Sending…';
-    setTimeout(() => {
-      statusEl.textContent = 'Thanks! I will get back to you shortly.';
-      form.reset();
-    }, 800);
+
+    try {
+      const res = await fetch('http://localhost:5500/api/send-contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const json = await res.json();
+
+      if (res.ok && json.success) {
+        statusEl.textContent = json.message || '✅ Message sent successfully!';
+        form.reset();
+      } else {
+        statusEl.textContent = json.message || '❌ Unable to send message.';
+      }
+    } catch (err) {
+      console.error('❌ Network error:', err);
+      statusEl.textContent = '⚠️ Network error — please try again later.';
+    }
   });
 }
 
 // ===== NAV ACTIVE STATE ON SCROLL =====
-const sections = ['home','projects','about','experience','contact']
-  .map(id=>document.getElementById(id))
+const sections = ['home', 'projects', 'about', 'education', 'experience', 'contact']
+  .map(id => document.getElementById(id))
   .filter(Boolean);
 const links = $$('header nav a');
 const onScroll = () => {
@@ -239,3 +284,85 @@ const onScroll = () => {
 };
 document.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
+
+// Certification image modal logic
+const certImgs = $$('.cert-view-img');
+const certImgModal = $('#certImgModal');
+const certImgModalImg = $('#certImgModalImg');
+const certImgModalClose = $('.img-modal-close');
+
+certImgs.forEach(img => {
+  img.addEventListener('click', () => {
+    certImgModalImg.src = img.src;
+    certImgModal.style.display = 'flex';
+    certImgModal.focus();
+  });
+  img.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      certImgModalImg.src = img.src;
+      certImgModal.style.display = 'flex';
+      certImgModal.focus();
+    }
+  });
+});
+
+if (certImgModalClose) {
+  certImgModalClose.addEventListener('click', () => {
+    certImgModal.style.display = 'none';
+    certImgModalImg.src = '';
+  });
+  certImgModalClose.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      certImgModal.style.display = 'none';
+      certImgModalImg.src = '';
+    }
+  });
+}
+
+// Close modal when clicking outside image
+if (certImgModal) {
+  certImgModal.addEventListener('click', (e) => {
+    if (e.target === certImgModal) {
+      certImgModal.style.display = 'none';
+      certImgModalImg.src = '';
+    }
+  });
+}
+
+// ===== NAV TOGGLE (responsive dropdown) =====
+const navToggle = $('#navToggle');
+const primaryNav = $('#primaryNav');
+
+if (navToggle && primaryNav) {
+  function setNavOpen(open) {
+    navToggle.classList.toggle('open', open);
+    primaryNav.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  navToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setNavOpen(!primaryNav.classList.contains('open'));
+  });
+
+  // Close when clicking a link
+  $$('#primaryNav a').forEach(a => a.addEventListener('click', () => setNavOpen(false)));
+
+  // Close when clicking outside the nav (on small screens)
+  document.addEventListener('click', (e) => {
+    if (!primaryNav.classList.contains('open')) return;
+    const inside = primaryNav.contains(e.target) || navToggle.contains(e.target);
+    if (!inside) setNavOpen(false);
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setNavOpen(false);
+  });
+
+  // Ensure nav closes when resizing to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) setNavOpen(false);
+  });
+}
+

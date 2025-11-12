@@ -5,8 +5,6 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
-import path from "path";
-import { fileURLToPath } from "url";
 
 dotenv.config();
 
@@ -15,21 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 // ======================
-// PATH CONFIGURATION (for ES Modules)
-// ======================
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// ======================
-// SERVE STATIC FRONTEND FILES
-// ======================
-app.use(express.static(path.join(__dirname, "public")));
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
-
-// ======================
-// SMTP / EMAIL CONFIGURATION
+// SMTP CONFIGURATION
 // ======================
 const smtpHost = process.env.SMTP_HOST;
 const smtpPort = parseInt(process.env.SMTP_PORT || "587", 10);
@@ -44,20 +28,17 @@ if (smtpHost && smtpUser && smtpPass) {
   transporter = nodemailer.createTransport({
     host: smtpHost,
     port: smtpPort,
-    secure: smtpPort === 465, // SSL for 465, TLS otherwise
+    secure: smtpPort === 465, // use TLS if port 465
     auth: {
       user: smtpUser,
       pass: smtpPass,
     },
-    connectionTimeout: 30000, // 30s timeout
   });
 
-  // Verify SMTP connection
+  // Verify SMTP connection at startup
   transporter.verify((error, success) => {
     if (error) {
       console.error("❌ SMTP connection failed:", error.message);
-      console.warn("⚠️ Falling back to log emails only.");
-      transporter = null; // disable transporter if connection fails
     } else {
       console.log("✅ SMTP server is ready to send emails");
     }
@@ -73,16 +54,16 @@ app.post("/api/send-contact", async (req, res) => {
   try {
     const { name, email, subject, message } = req.body || {};
 
+    // Basic input validation
     if (!name || !email || !subject || !message) {
-      return res.status(400).json({
-        success: false,
-        message: "Missing required fields.",
-      });
+      return res.status(400).json({ success: false, message: "Missing required fields." });
     }
 
-    // If SMTP not available, log email instead of sending
+    // ======================
+    // SEND EMAIL
+    // ======================
     if (!transporter) {
-      console.log("📩 Contact form data (SMTP not configured):", { name, email, subject, message });
+      console.log("Contact form data (no SMTP):", { name, email, subject, message });
       return res.json({
         success: true,
         message: "Form received (email not sent — SMTP not configured).",
@@ -109,7 +90,7 @@ app.post("/api/send-contact", async (req, res) => {
     return res.json({ success: true, message: "Email sent successfully!" });
   } catch (err) {
     console.error("❌ Error while sending email:", err.message);
-    return res.status(500).json({ success: false, message: "Server error. Email not sent." });
+    return res.status(500).json({ success: false, message: "Server error." });
   }
 });
 
